@@ -15,8 +15,8 @@ int main() {
   ConditionalStream onStream { std::cout, true };
   ConditionalStream offStream { std::cout, false };
 
-  onStream << Foo();
-  offStream << Foo();
+  onStream << Foo() << std::hex << std::endl;
+  offStream << Foo() << std::hex << std::endl;
 
   return 0;
 }

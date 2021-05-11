@@ -25,3 +25,15 @@ ConditionalStream &operator<<(ConditionalStream &cs, T const &t) {
   }
   return cs;
 }
+
+
+template<typename _CharT, typename _Traits>
+using EndlType = std::basic_ostream<_CharT, _Traits>&(*)(std::basic_ostream<_CharT, _Traits>&);
+
+ConditionalStream &operator<<(ConditionalStream &cs, EndlType<char, std::char_traits<char>> const &inEndl) {
+  if (cs.mEnabled) {
+    cs.mOstream << inEndl;
+  }
+  return cs;
+}
+
