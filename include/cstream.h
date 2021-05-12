@@ -28,11 +28,14 @@ ConditionalStream &operator<<(ConditionalStream &cs, T const &t) {
 
 
 template<typename _CharT, typename _Traits>
-using EndlType = std::basic_ostream<_CharT, _Traits>&(*)(std::basic_ostream<_CharT, _Traits>&);
+using StreamModifierType = std::basic_ostream<_CharT, _Traits>&(*)(std::basic_ostream<_CharT, _Traits>&);
 
-ConditionalStream &operator<<(ConditionalStream &cs, EndlType<char, std::char_traits<char>> const &inEndl) {
+ConditionalStream &operator<<(
+  ConditionalStream &cs,
+  StreamModifierType<char, std::char_traits<char>> const &inStreamModifier
+) {
   if (cs.mEnabled) {
-    cs.mOstream << inEndl;
+    cs.mOstream << inStreamModifier;
   }
   return cs;
 }
