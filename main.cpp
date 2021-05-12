@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "cstream.h"
+#include "conditional_ostream.h"
 
 
 struct Foo {};
@@ -12,16 +12,19 @@ std::ostream &operator<<(std::ostream &os, Foo const &) {
 
 
 int main() {
-  ConditionalStream onStream { std::cout, true };
-  ConditionalStream offStream { std::cout, false };
+  ConditionalOStream on  { std::cout, true };
+  ConditionalOStream off { std::cout, false };
 
   Foo f {};
 
-  onStream << f << std::hex << std::endl;
-  offStream << f << std::hex << std::endl;
+  on  << f << std::hex << std::endl;  // Streams
+  off << f << std::hex << std::endl;  // Doesn't
 
-  onStream << &f << std::hex << std::endl;
-  offStream << &f << std::hex << std::endl;
+  (on || off) << f << std::hex << std::endl;  // Streams
+  (on && off) << f << std::hex << std::endl;  // Doesn't
+
+  on  << &f << std::hex << std::endl;  // Streams
+  off << &f << std::hex << std::endl;  // Doesn't
 
   return 0;
 }
