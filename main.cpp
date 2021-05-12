@@ -20,9 +20,6 @@ int main() {
   on  << f << std::hex << std::endl;  // Streams
   off << f << std::hex << std::endl;  // Doesn't
 
-  (on || off) << f << std::hex << std::endl;  // Streams
-  (on && off) << f << std::hex << std::endl;  // Doesn't
-
   on  << &f << std::hex << std::endl;  // Streams
   off << &f << std::hex << std::endl;  // Doesn't
 
