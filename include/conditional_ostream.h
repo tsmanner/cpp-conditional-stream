@@ -27,10 +27,23 @@ struct ConditionalOStream {
 // for ConditionalOStream and a type T
 //
 
+// For a const T
 template <typename T>
 ConditionalOStream &operator<<(
   ConditionalOStream &inConditionalOStream,
   T const &inT
+) {
+  if (inConditionalOStream.mEnabled) {
+    inConditionalOStream.mOStream << inT;
+  }
+  return inConditionalOStream;
+}
+
+// For a non-const T
+template <typename T>
+ConditionalOStream &operator<<(
+  ConditionalOStream &inConditionalOStream,
+  T &&inT
 ) {
   if (inConditionalOStream.mEnabled) {
     inConditionalOStream.mOStream << inT;
