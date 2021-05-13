@@ -1,0 +1,11 @@
+Tom Manner:
+  name: Tom Manner
+  bio: I trick rocks into thinking
+  location: New York, USA
+  links:
+    - label: Email
+      icon: fas fa-fw fa-envelope-square
+      url: mailto:zephrincochrane@gmail.com
+    - label: Github
+      icon: fab fa-fw fa-github
+      url: https://github.com/tsmanner

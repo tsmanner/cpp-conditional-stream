@@ -1,0 +1,11 @@
+api-docs:
+  - title: API
+    children:
+      - title: Getting Started
+        url: /api/getting-started/
+
+code-docs:
+  - title: Code
+    children:
+      - title: Structure
+        url: /code/structure/

@@ -1,0 +1,8 @@
+.row {
+  display: flex;
+  column-gap: 2ch;
+}
+
+.row > .col {
+  flex: 1 1 0;
+}

@@ -1,0 +1,38 @@
+# Theme Selection
+remote_theme: tsmanner/minimal-mistakes
+plugins:
+  - jekyll-include-cache
+
+# Site Settings
+minimal_mistakes_skin: dark
+locale: en-US
+timezone: America/New_York
+
+title: Conditional OStream
+subtitle: An efficient conditional output stream for C++
+name: Tom Manner
+author: Tom Manner
+
+search: true
+
+# Page Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: single
+      css:
+        - /assets/css/my.css
+      sidebar:
+        nav:
+          - api-docs
+          - code-docs
+
+# Collections
+collections:
+  api:
+    output: true
+    permalink: /:collection/:path/
+  code:
+    output: true
+    permalink: /:collection/:path/
