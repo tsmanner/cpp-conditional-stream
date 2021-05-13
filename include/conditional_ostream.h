@@ -8,14 +8,16 @@
 //
 
 struct ConditionalOStream {
-  std::ostream *mOStream;
+  std::ostream *mOStream { nullptr };
 
   // Explicit constructors so that implicit
   // conversion from `std::ostream &`s can't
   // happen and lead to ambiguous overloads.
 
+  explicit ConditionalOStream() {}
+
   explicit ConditionalOStream(
-    std::ostream *inOStream = nullptr
+    std::ostream *inOStream
   ):
     mOStream(inOStream)
   {}
