@@ -8,15 +8,36 @@
 //
 
 struct ConditionalOStream {
-  std::ostream& mOStream;
-  const bool mEnabled { true };
+  std::ostream *mOStream;
 
-  ConditionalOStream(
-    std::ostream &inOStream,
-    bool const &inEnabled = true
+  // Explicit constructors so that implicit
+  // conversion from `std::ostream &`s can't
+  // happen and lead to ambiguous overloads.
+
+  explicit ConditionalOStream(
+    std::ostream *inOStream = nullptr
   ):
-    mOStream(inOStream),
-    mEnabled(inEnabled)
+    mOStream(inOStream)
+  {}
+
+  explicit ConditionalOStream(
+    std::ostream &inOStream
+  ):
+    mOStream(&inOStream)
+  {}
+
+  explicit ConditionalOStream(
+    std::ostream *inOStream,
+    bool const &inEnabled
+  ):
+    mOStream(inEnabled ? inOStream : nullptr)
+  {}
+
+  explicit ConditionalOStream(
+    std::ostream &inOStream,
+    bool const &inEnabled
+  ):
+    mOStream(inEnabled ? &inOStream : nullptr)
   {}
 
 };
@@ -29,24 +50,24 @@ struct ConditionalOStream {
 
 // For a const T
 template <typename T>
-ConditionalOStream &operator<<(
-  ConditionalOStream &inConditionalOStream,
+ConditionalOStream const &operator<<(
+  ConditionalOStream const &inConditionalOStream,
   T const &inT
 ) {
-  if (inConditionalOStream.mEnabled) {
-    inConditionalOStream.mOStream << inT;
+  if (inConditionalOStream.mOStream) {
+    (*inConditionalOStream.mOStream) << inT;
   }
   return inConditionalOStream;
 }
 
 // For a non-const T
 template <typename T>
-ConditionalOStream &operator<<(
-  ConditionalOStream &inConditionalOStream,
+ConditionalOStream const &operator<<(
+  ConditionalOStream const &inConditionalOStream,
   T &&inT
 ) {
-  if (inConditionalOStream.mEnabled) {
-    inConditionalOStream.mOStream << inT;
+  if (inConditionalOStream.mOStream) {
+    (*inConditionalOStream.mOStream) << inT;
   }
   return inConditionalOStream;
 }
@@ -57,12 +78,12 @@ ConditionalOStream &operator<<(
 // and other similar "special" stream functions.
 //
 
-ConditionalOStream &operator<<(
-  ConditionalOStream &inConditionalOStream,
+ConditionalOStream const &operator<<(
+  ConditionalOStream const &inConditionalOStream,
   std::ostream&(* const &inStreamFunction)(std::ostream&)
 ) {
-  if (inConditionalOStream.mEnabled) {
-    inConditionalOStream.mOStream << inStreamFunction;
+  if (inConditionalOStream.mOStream) {
+    (*inConditionalOStream.mOStream) << inStreamFunction;
   }
   return inConditionalOStream;
 }

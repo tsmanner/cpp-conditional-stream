@@ -19,18 +19,31 @@ std::ostream &operator<<(std::ostream &os, Bar &) {
 }
 
 
+ConditionalOStream s() {
+  return ConditionalOStream { std::cout };
+}
+
+
 int main() {
-  ConditionalOStream on  { std::cout, true };
-  ConditionalOStream off { std::cout, false };
+  ConditionalOStream on  { std::cout };
+  ConditionalOStream off {};
+
 
   Foo f {};
   Bar b {};
 
-  on  << f << b << std::hex << std::endl;  // Streams
-  off << f << b << std::hex << std::endl;  // Doesn't
+  ConditionalOStream( std::cout)        << f << b << std::hex << std::endl;  // Streams
+  ConditionalOStream(&std::cout)        << f << b << std::hex << std::endl;  // Streams
+  ConditionalOStream( std::cout, true)  << f << b << std::hex << std::endl;  // Streams
+  ConditionalOStream(&std::cout, true)  << f << b << std::hex << std::endl;  // Streams
+  ConditionalOStream( std::cout, false) << f << b << std::hex << std::endl;  // Doesn't
+  ConditionalOStream(&std::cout, false) << f << b << std::hex << std::endl;  // Doesn't
+  s()                                   << f << b << std::hex << std::endl;  // Streams
+  on                                    << f << b << std::hex << std::endl;  // Streams
+  off                                   << f << b << std::hex << std::endl;  // Doesn't
 
-  on  << &f << std::hex << std::endl;  // Streams
-  off << &f << std::hex << std::endl;  // Doesn't
+  on  << &f << '\n';  // Streams
+  off << &f << '\n';  // Doesn't
 
   return 0;
 }
