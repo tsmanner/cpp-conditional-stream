@@ -1,0 +1,75 @@
+language: nix
+nix: 2.3.7
+
+jobs:
+  include:
+    - name: clang11
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).clang_11" -o clang11.out
+        - ./clang11.out
+        - rm ./clang11.out
+    - name: clang10
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).clang_10" -o clang10.out
+        - ./clang10.out
+        - rm ./clang10.out
+    - name: clang9
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).clang_9" -o clang9.out
+        - ./clang9.out
+        - rm ./clang9.out
+    - name: clang8
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).clang_8" -o clang8.out
+        - ./clang8.out
+        - rm ./clang8.out
+    - name: clang7
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).clang_7" -o clang7.out
+        - ./clang7.out
+        - rm ./clang7.out
+    - name: clang6
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).clang_6" -o clang6.out
+        - ./clang6.out
+        - rm ./clang6.out
+    - name: clang5
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).clang_5" -o clang5.out
+        - ./clang5.out
+        - rm ./clang5.out
+    - name: gcc10
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).gcc10" -o gcc10.out
+        - ./gcc10.out
+        - rm ./gcc10.out
+    - name: gcc9
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).gcc9" -o gcc9.out
+        - ./gcc9.out
+        - rm ./gcc9.out
+    - name: gcc8
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).gcc8" -o gcc8.out
+        - ./gcc8.out
+        - rm ./gcc8.out
+    - name: gcc7
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).gcc7" -o gcc7.out
+        - ./gcc7.out
+        - rm ./gcc7.out
+    - name: gcc6
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).gcc6" -o gcc6.out
+        - ./gcc6.out
+        - rm ./gcc6.out
+    - name: gcc49
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).gcc49" -o gcc49.out
+        - ./gcc49.out
+        - rm ./gcc49.out
+    - name: gcc48
+      script:
+        - nix-build tests --arg compiler "(import <nixpkgs> {}).gcc48" -o gcc48.out
+        - ./gcc48.out
+        - rm ./gcc48.out
