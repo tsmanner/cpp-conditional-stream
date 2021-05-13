@@ -52,7 +52,7 @@ struct ConditionalOStream {
 
 // For a const T
 template <typename T>
-ConditionalOStream const &operator<<(
+inline ConditionalOStream const &operator<<(
   ConditionalOStream const &inConditionalOStream,
   T const &inT
 ) {
@@ -64,7 +64,7 @@ ConditionalOStream const &operator<<(
 
 // For a non-const T
 template <typename T>
-ConditionalOStream const &operator<<(
+inline ConditionalOStream const &operator<<(
   ConditionalOStream const &inConditionalOStream,
   T &&inT
 ) {
@@ -80,7 +80,7 @@ ConditionalOStream const &operator<<(
 // and other similar "special" stream functions.
 //
 
-ConditionalOStream const &operator<<(
+inline ConditionalOStream const &operator<<(
   ConditionalOStream const &inConditionalOStream,
   std::ostream&(* const &inStreamFunction)(std::ostream&)
 ) {
