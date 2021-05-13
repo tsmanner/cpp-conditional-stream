@@ -8,7 +8,7 @@
 //
 
 struct ConditionalOStream {
-  std::ostream *mOStream { nullptr };
+  std::ostream *const mOStream { nullptr };
 
   // Explicit constructors so that implicit
   // conversion from `std::ostream &`s can't
