@@ -3,6 +3,9 @@ nix: 2.3.7
 
 jobs:
   include:
+    - name: profiling
+      script:
+        - tests/profiling/profile.sh
     - name: clang11
       script:
         - nix-build tests --arg compiler "(import <nixpkgs> {}).clang_11" -o clang11.out
