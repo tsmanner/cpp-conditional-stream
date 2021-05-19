@@ -4,6 +4,9 @@ nix: 2.3.7
 jobs:
   include:
     - name: profiling
+      env:
+        - LANG: "en_US.UTF-8"
+        - LANGUAGE: "en_US:en"
       script:
         - tests/profiling/profile.sh
     - name: clang11
