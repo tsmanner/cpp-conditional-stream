@@ -1,0 +1,26 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "group": "build",
+      "command": "source ~/.zshrc && nix run nixpkgs.clang_11 -c clang++ -Iinclude tests/example_temporaries.cpp -o example.out",
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "decompile",
+      "type": "shell",
+      "group": "build",
+      "command": "objdump --demangle -d example.out 2>&1 > example.s",
+      "dependsOn": [
+        "build"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

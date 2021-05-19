@@ -8,7 +8,7 @@
 //
 
 struct ConditionalOStream {
-  std::ostream *const mOStream { nullptr };
+  std::ostream *mOStream { nullptr };
 
   // Explicit constructors so that implicit
   // conversion from `std::ostream &`s can't
@@ -41,6 +41,36 @@ struct ConditionalOStream {
   ):
     mOStream(inEnabled ? &inOStream : nullptr)
   {}
+
+  // Copy
+  explicit ConditionalOStream(
+    ConditionalOStream const &inConditionalOStream
+  ):
+    mOStream(inConditionalOStream.mOStream)
+  {}
+
+  // Move
+  explicit ConditionalOStream(
+    ConditionalOStream &&inConditionalOStream
+  ):
+    mOStream(inConditionalOStream.mOStream)
+  {}
+
+  // Copy Assignment
+  ConditionalOStream &operator=(
+    ConditionalOStream const &inConditionalOStream
+  ) {
+    mOStream = inConditionalOStream.mOStream;
+    return *this;
+  }
+
+  // Move Assignment
+  ConditionalOStream &operator=(
+    ConditionalOStream &&inConditionalOStream
+  ) {
+    mOStream = inConditionalOStream.mOStream;
+    return *this;
+  }
 
 };
 
@@ -76,8 +106,8 @@ inline ConditionalOStream const &operator<<(
 
 
 //
-// Special stream insertion operator for std::endl
-// and other similar "special" stream functions.
+// Stream insertion operator for overloaded unary
+// streaming functions, like `std::endl`.
 //
 
 inline ConditionalOStream const &operator<<(
