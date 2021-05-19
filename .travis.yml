@@ -4,10 +4,9 @@ nix: 2.3.7
 jobs:
   include:
     - name: profiling
-      env:
-        - LANG: "en_US.UTF-8"
-        - LANGUAGE: "en_US:en"
       script:
+        - glibcLocales=$(nix-build --no-out-link "<nixpkgs>" -A glibcLocales)
+        - export LOCALE_ARCHIVE_2_27="${glibcLocales}/lib/locale/locale-archive"
         - tests/profiling/profile.sh
     - name: clang11
       script:
