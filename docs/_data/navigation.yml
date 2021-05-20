@@ -9,3 +9,7 @@ code-docs:
     children:
       - title: Structure
         url: /code/structure/
+      - title: Profiling Results
+        url: /code/profiling/
+      - title: Assembly
+        url: /code/assembly/
