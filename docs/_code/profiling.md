@@ -115,6 +115,24 @@ int main() {
 }
 ```
 
+## Stream with failbit set
+
+**tests/profiling/failbit.cpp**
+```cpp
+#include <iostream>
+#include <fstream>
+
+#include "conditional_ostream.h"
+#include "profile.h"
+
+int main() {
+  auto stream = std::ofstream();
+  stream.setstate(std::ios::failbit);
+  time_streaming(stream);
+  return 0;
+}
+```
+
 ## Stream to a `ConditionalOStream`
 
 **tests/profiling/conditional.cpp**
